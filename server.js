@@ -93,6 +93,17 @@ app.get('/test',function(req,res) {
 	res.send('{response:"You have some info!"}');
 });
 
+app.get('/jobRoles', function(req, res) {
+	//deal with all items relating to job roles
+	
+	
+});
+
+app.get('/api',function(req,res) {
+	//API Call!!
+	res.send({req:req,res:res});
+}
+
 // error handling
 app.use(function(err, req, res, next){
   console.error(err.stack);
