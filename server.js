@@ -101,7 +101,7 @@ app.get('/jobRoles', function(req, res) {
 
 app.get('/api',function(req,res) {
 	//API Call!!
-	res.send('{req:req,res:res}');
+	res.send('{req:'+req+'}');
 });
 
 // error handling
