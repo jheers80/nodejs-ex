@@ -1,7 +1,8 @@
 //  OpenShift sample Node application
 var express = require('express'),
     app     = express(),
-    morgan  = require('morgan');
+    morgan  = require('morgan'),
+	mongoose=require('mongoose');
     
 Object.assign=require('object-assign')
 
@@ -89,20 +90,13 @@ app.get('/pagecount', function (req, res) {
   }
 });
 
-app.get('/test',function(req,res) {
-	res.send('{response:"You have some info!"}');
-});
+var user=require('./routes/user');
+var location=require('./routes/location');
+var storeStatus=require('./routes/storeStatus');
 
-app.get('/jobRoles', function(req, res) {
-	//deal with all items relating to job roles
-	
-	
-});
-
-app.get('/api',function(req,res) {
-	//API Call!!
-	res.send('{req:"'+JSON.stringify(req)+'"}');
-});
+app.use('/user/',user);
+app.use('/location',location);
+app.use('/storeStatus'),storeStatus);
 
 // error handling
 app.use(function(err, req, res, next){
