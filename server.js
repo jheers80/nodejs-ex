@@ -93,10 +93,12 @@ app.get('/pagecount', function (req, res) {
 var user=require('./routes/user');
 var location=require('./routes/location');
 var storeStatus=require('./routes/storeStatus');
+var train=require('./routes/train');
 
 app.use('/user/',user);
 app.use('/location',location);
-app.use('/storeStatus'),storeStatus);
+app.use('/storeStatus',storeStatus);
+app.user('/train',train);
 
 // error handling
 app.use(function(err, req, res, next){
