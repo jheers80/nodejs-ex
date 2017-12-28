@@ -1,0 +1,14 @@
+extends layout
+
+block content
+	h1= title
+	div
+		p Name: #{loc.City}, #{loc.State}
+	
+		p ID: !{loc.LocationID}
+	
+		p Status: #{loc.Status.Status}
+		
+		p 
+			a(href=loc.updateurl) Update Information
+	div

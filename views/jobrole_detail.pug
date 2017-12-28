@@ -1,0 +1,13 @@
+extends layout
+
+block content
+	h1= title
+	div
+		p Name: #{jobrole.Name}
+	
+		p
+			a(href=jobrole.updateurl) Update Job Role
+		hr
+		p
+			a(href=jobrole.url+'/delete') Delete Job Role
+	div

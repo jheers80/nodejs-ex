@@ -1,0 +1,27 @@
+extends layout
+
+block content
+	h1 #{title}
+
+	form(method='POST' action='')
+		div.form-group
+			if ti_id
+				input(type='hidden' value=ti_id)
+			else 
+				label(for='trainingInstance') Training Instance:
+			
+				select#trainingInstance.form-control(type='select', placeholder='Select Training Instance' name='trainingInstance' required='true' )
+					for ti in ti_list
+						if tid
+							option(value=ti._id selected=(ti._id.toString()==tid.trainingInstance?'selected':false)) #{ti.trainingInstance}
+						else
+							option(value=ti._id) #{ti.trainingInstance}
+			label (for='ti_id') Content:
+			input#ti_id.form-control(type='text', placeholder='Enter Content Here' name='ti_id' value=(undefined===tid ? '' : tid.Text))
+			
+		button.btn.btn-primary(type='submit') Submit
+
+	if errors 
+		ul
+			for error in errors
+				li!= error.msg

@@ -9,4 +9,8 @@ StoreStatusSchema.virtual('id').get(function() {
 	return this._id;
 });
 
-modules.exports=mongoose.model('Location',StoreStatusSchema);
+StoreStatusSchema.virtual('url').get(function() {
+	return '/train/storeStatus/'+this._id;
+});
+
+module.exports=mongoose.model('StoreStatus',StoreStatusSchema);

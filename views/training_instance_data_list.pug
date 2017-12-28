@@ -1,0 +1,60 @@
+extends layout
+
+mixin plusdisp(parID)
+	span.addDataChild
+		a.pluslink(href='#') &plus;
+		div.addDataForm
+			form(method='POST' action='')
+				div.form-group
+					input(type='hidden' name='parID', value=parID)
+					label(for=data) Data:
+					input#data.form-control(type='text', placeholder='Enter Data Here' name='data')
+				button.btn.btn-primary(type='submit') Submit
+					
+		
+mixin display(child, level)
+	- var lev=level%4
+	- var levClass='level'+lev;
+	ol.child(class=levClass)
+		if child.Children
+			for cd in child.Children
+				li.node
+					span!=cd.Text	
+					if add
+						+plusdisp(cd._id)
+						- var newlevel=level+1
+						+display(cd,newlevel)
+		else 
+			if add
+				li.node
+					+plusdisp(child._id)
+				
+block content
+	h1 #{title}
+	div#editnav 
+		ul.editnav
+			li 
+				a(href=training_instance.url+'/trainingdata/edit/add') Add Content
+			li 
+				a(href=training_instance.url+'/trainingdata/edit/delete') Delete Content
+			li 
+				a(href=training_instance.url+'/trainingdata/edit/move') Move Content
+			li 	
+				a(href=training_instance.url+'/trainingdata') View Content
+	if edit 
+		div#training_instance_data_list.edit
+	else 
+		div#training_instance_data_list
+		
+		
+	h2 !{training_instance.Name}
+	ol#training_data_outline
+		for td in training_data
+			li.node
+				span!=td.Text
+				if edit
+					+plusdisp(td._id)
+				+display(td,0)
+		if edit
+			li.node
+				+plusdisp(0)

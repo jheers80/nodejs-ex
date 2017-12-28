@@ -1,0 +1,28 @@
+extends layout
+
+block content
+	h1 #{title}
+
+	form(method='POST' action='')
+		div.form-group
+			label(for='LocationID') Location ID:
+			input#LocationID.form-control(type='text', placeholder='4 Digit Location ID' name='LocationID' value=(undefined===loc ? '' : loc.LocationID))
+			label(for='City') City:
+			input#Location.form-control(type='text', placeholder='City' name='City' value=(undefined===loc ? '' : loc.City))
+			label(for='State') State:
+			input#Location.form-control(type='text', placeholder='State Abbreviation' name='State' value=(undefined===loc ? '' : loc.State))
+			label(for='status') Status:
+			
+			select#status.form-control(type='select', placeholder='Select Store Status' name='status' required='true' )
+				option(value='') Select Store Status
+				for stat in Status
+					if loc
+						option(value=stat._id selected=(stat._id.toString()==loc.Status?'selected':false)) #{stat.Status}
+					else
+						option(value=stat._id) #{stat.Status}
+		button.btn.btn-primary(type='submit') Submit
+
+	if errors 
+		ul
+			for error in errors
+				li!= error.msg

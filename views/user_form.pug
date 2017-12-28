@@ -1,0 +1,35 @@
+extends layout
+
+block content
+	h1 #{title}
+	
+	form(method='POST' action='') 
+		div.form-group
+			label(for=firstname) First Name:
+			input#firstname.form-control(type='text', placeholder='First Name' name='firstname' value=(undefined==user?'':user.firstName))
+			
+			label(for=lastname) Last Name:
+			input#lastname.form-control(type='text', placeholder='Last Name' name='lastname' value=(undefined==user?'':user.lastName))
+			
+			label(for=email) Email:
+			input#email.form-control(type='email', placeholder='Email' name='email' value=(undefined==user?'':user.email))
+			
+			label(for=password1) Password:
+			input#password1.form-control(type='password' placeholder='Password' name='password1')
+			
+			label(for=password2) Confirm Password:
+			input#password2.form-control(type='password' placeholder='Confirm Password' name='password2')
+			
+			label(for=location) Location:
+			select#location.form-control(type='select' placeholder='Select Location' name='location' required='true')
+				option(value='') Select Location
+				for loc in locations
+					if user
+						option(value=loc._id selected=(loc._id.toString()==user.Location?'selected':false)) #{loc.fulllocation}
+					else
+						option(value=loc._id) #{loc.fulllocation}
+		button.btn.btn-primary(type='submit') Register
+	if errors 
+		ul
+			for error in errors
+				li!= error.msg

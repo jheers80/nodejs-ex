@@ -1,0 +1,11 @@
+extends layout
+
+block content
+	h1= title
+	
+	ul
+	each jobrole in jobrole_list
+		li
+			a(href=jobrole.url) #{jobrole.Name}
+	else 
+		li There are no job roles.

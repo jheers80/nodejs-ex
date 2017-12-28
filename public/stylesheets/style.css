@@ -1,0 +1,67 @@
+.sidebar-nav {
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+}
+
+div.addDataForm {
+	display:none;
+}
+ol li {
+	padding-top:.5em;
+}
+
+ol#training_data_outline {
+	list-style-type:decimal;
+	
+}
+
+ol#training_data_outline ol.level0 {
+	list-style-type:upper-alpha;
+}
+
+ol#training_data_outline ol.level1 {
+	list-style-type:lower-roman;
+}
+
+ol#training_data_outline ol.level2 {
+	list-style-type:lower-alpha;
+}
+
+ol#training_data_outline ol.level3 {
+	list-style-type:decimal;
+}
+
+
+.moveicon {
+	display:none;
+}
+
+.move .moveicon{
+	display:inline;
+}
+
+ul.editnav {
+	list-style-type:none;
+	margin:0;
+	padding:0;
+	background-color:#00d;
+	overflow:hidden;
+}
+
+ul.editnav li {
+	float:left;
+	
+}
+
+ul.editnav li a {
+	text-align:center;
+	display:block;
+	padding:14px 16px;
+	color:white;
+	text-decoration:none;
+}
+
+ul.editnav li a:hover {
+	background-color:#00f;
+}

@@ -1,0 +1,15 @@
+extends layout
+
+block content
+	h1= title
+	form(method='POST' action='')
+		div.form-group
+			for ti in ti_list
+				input(type='radio', name='ti_copy_from', value=ti._id)
+				label(for='ti.Name') #{ti.Name}
+		button.btn.btn-primary(type='submit') Submit
+
+	if errors 
+		ul
+			for error in errors
+				li!= error.msg

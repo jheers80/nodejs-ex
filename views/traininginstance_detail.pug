@@ -1,0 +1,19 @@
+extends layout
+
+block content
+	h1= title
+	div
+		p Name: !{ti.Name}
+		
+		p Job Role: !{ti.JobRole.Name}
+		 
+		p Location: !{ti.Location.fulllocation}
+		
+		hr
+		
+		p 
+			a(href='/train/traininginstance/'+ti._id+'/trainingdata/edit') Edit Content
+		p
+			a(href='/train/traininginstance/'+ti._id+'/trainingdata') View Content
+		
+	div

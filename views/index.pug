@@ -1,0 +1,17 @@
+extends layout
+
+block content
+	h1= title
+	p Welcome to #{title}
+  
+	h1 Dynamic Content
+  
+	if error
+		p Error getting Dynamic Content
+	else 
+		p The Training System has the following items:
+	
+		ul
+			li #[strong Users:] !{data.user_count}
+			li #[strong Locations:] !{data.location_count}
+			li #[strong Job Roles:] !{data.jobrole_count}

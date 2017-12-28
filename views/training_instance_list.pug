@@ -1,0 +1,22 @@
+extends layout
+
+block content
+	h1= title
+	
+	ul
+	each inst in list_training_instance
+		li
+			- var inst_url=inst.url
+			- var inst_Name = inst.Name
+			- var jr_url =inst.JobRole.url
+			- var jr_name = inst.JobRole.Name
+			- var loc_url = inst.Location.url
+			- var loc_name = inst.Location.fulllocation
+			a(href=inst_url) !{inst_Name}
+			|  for 
+			a(href=jr_url) !{jr_name}
+			|  in 
+			a(href=loc_url) !{loc_name}
+			
+	else 
+		li There are no training instances.

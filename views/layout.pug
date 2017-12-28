@@ -1,0 +1,44 @@
+doctype html
+html(lang='en')
+	head
+		title= title
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+		script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+		script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+		script(src='/js/trainingapp.js')
+		link(rel='stylesheet', href='/stylesheets/style.css')
+	body
+		div(class='container-fluid')
+			div(class='row')
+			div(class='col-sm-2')
+				block sidebar
+					ul(class='sidebar-nav')
+						li 
+							a(href='/train') Home
+						li 
+							a(href='/train/locations') All locations
+						li 
+							a(href='/train/users') All users
+						li 
+							a(href='/train/storestatus') All statuses
+						li
+							a(href='/train/jobroles') All Job Roles
+						li 
+							a(href='/train/traininginstances') All Training Instances
+						li
+							hr
+						li 
+							a(href='/train/location/create') Create new location
+						li 
+							a(href='/train/user/create') Create new user
+						li 
+							a(href='/train/storestatus/create') Create new status
+						li
+							a(href='/train/jobrole/create') Create new Job Role
+						li 
+							a(href='/train/traininginstance/create') Create new training instance
+                
+			div(class='col-sm-10')
+				block content

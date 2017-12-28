@@ -1,0 +1,11 @@
+extends layout
+
+block content
+	h1 #{title}: #{jobrole.Name}
+	p Do you really want to delete this Job Role?
+	
+	form(method='POST' action='')
+		div.form-group
+			input#jobroleid.form-control(type='hidden', name='jobroleid', required='true', value=(jobrole==='undefined'?'' :jobrole._id))
+			
+		button.btn.btn-primary(type='submit') Delete
