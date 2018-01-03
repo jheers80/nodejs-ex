@@ -12,6 +12,7 @@
     "express": "^4.16.2",
     "express-validator": "^4.3.0",
     "global": "^4.3.2",
+    "jsonwebtoken": "^8.1.0",
     "mocha": "^2.4.5",
     "mongodb": "^2.1.16",
     "mongoose": "^4.7.2",
