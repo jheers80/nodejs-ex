@@ -16,7 +16,8 @@
     "mongodb": "^2.1.16",
     "mongoose": "^4.7.2",
     "morgan": "^1.7.0",
-    "object-assign": "4.1.0"
+    "object-assign": "4.1.0",
+    "sanitize-html": "^1.16.3"
   },
   "engine": {
     "node": "*",
