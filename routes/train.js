@@ -10,9 +10,19 @@ var jobrole_controller = require('../controllers/jobroleController');
 var training_instance_controller = require('../controllers/traininginstanceController');
 var training_data_controller = require('../controllers/trainingdataController');
 
+//Verify Tokens Module
+var VerifyToken = require('../controllers/verifyToken');
+
 //User Routes
 //Get Training Home Page
 router.get('/', train_controller.index)
+
+//Get route for user login
+router.get('/login', user_controller.user_login_get);
+
+router.post('/login', user_controller.user_login_post);
+
+router.get('/logout',user_controller.user_logout);
 
 //GET request for creating a user, NOTE: Must come before routes to display USER using id
 router.get('/user/create', user_controller.user_create_get);
@@ -34,6 +44,8 @@ router.post('/user/:id/update', user_controller.user_update_post);
 
 //Get request for one user
 router.get('/user/:id', user_controller.user_detail);
+
+
 
 //get request for list of all users
 router.get('/users', user_controller.user_list);
@@ -117,7 +129,7 @@ router.get('/jobroles', jobrole_controller.jobrole_list);
 //Training Instance Routes
 //GET request for creating a training_instance, NOTE: Must come before routes to display training instance using id
 
-router.get('/traininginstance/create', training_instance_controller.training_instance_create_get);
+router.get('/traininginstance/create',VerifyToken, training_instance_controller.training_instance_create_get);
 
 //POST Request for create a training_instance
 router.post('/traininginstance/create', training_instance_controller.training_instance_create_post);

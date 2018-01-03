@@ -9,7 +9,8 @@ var UserSchema = new Schema({
 	Location:{type: Schema.ObjectId, ref:'Location'},
 	passwordHash:String,
 	passwordSalt:String,
-	verified:{type:Boolean,default:false}
+	verified:{type:Boolean,default:false},
+	admin:{type:Boolean, default:false}
 });
 
 

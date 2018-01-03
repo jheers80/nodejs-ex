@@ -1,8 +1,25 @@
 var User = require('../models/user');
 var Location = require('../models/location');
 var async = require('async');
+var config=require('../config.js');
 
 var crypto=require('crypto');
+
+/**
+ * check if password given matches user given
+ * @function
+ * @param {User} user - user object of potential user
+ * @param {string} password - password to check
+ */
+ var checkPasswordForUser = function(password, user) {
+	 if (!user || !user.passwordSalt) {
+		 return false;
+	 }
+	 if (user)
+	 var salt=user.passwordSalt.toString();
+	 var passwordData=sha512(password, salt);
+	 return passwordData.passwordHash===user.passwordHash;
+ }
 
 /**
  * generates random string of characters i.e salt
@@ -57,7 +74,6 @@ exports.user_detail = function (req, res, next) {
 	.populate('Location')
 	.exec(function(err,user) {
 		if (err) {return next(err);}
-		console.log(user);
 		res.render('user_detail', {title:'User Detail', user:user});
 	});
 };
@@ -94,7 +110,7 @@ exports.user_create_post = function (req, res) {
 	req.sanitize('password2').trim();
 	req.checkBody('password1','Passwords must match').isEqual(req.body.password2);
 	var hsp=saltHashPassword(req.body.password1);
-	
+
 	var user=new User({
 		firstName:req.body.firstname,
 		lastName:req.body.lastname,
@@ -111,16 +127,58 @@ exports.user_create_post = function (req, res) {
 			},
 		}, function(err, results) {
 			if (err) {return next(err);}
-			console.log(user);
 			res.render('user_form',{title:'Create User', locations:results.locations, user:user, errors:errors});
 		});
 	} else {
-		user.save(function(err) {
+		User.find({email:req.body.email}).
+		exec(function(err,user) {
 			if (err) {return next(err);}
-			res.redirect(user.url);
+			if (!user) {
+				user.save(function(err) {
+					if (err) {return next(err);}
+					var token=jwt.sign({id:user._id},config.secret,{expiresIn:86400 //24 hours
+					});
+					res.status(200).send({auth:true,token:token});
+					res.redirect(user.url);
+				});
+			}
 		});
 	}
 };
+
+exports.user_login_post = function(req, res, next) {
+	var loginError=false;
+	errors=[];
+	User.findOne({email:req.body.email})
+		.exec(function(err, user) {
+		if (err) {
+			//Error
+			return next(err);
+		}
+		if (!user) {
+			loginError=true;
+			errors.push({msg:'Username Invalid'});
+		}
+		var validLogin = checkPasswordForUser(req.body.password, user);
+		if (validLogin) {
+			//Valid login, now what we do?
+			var token=jwt.sign({id:user._id},config.secret,{expiresIn:86400 //24 hours
+			});
+			res.send("User is Valid");
+
+		} else {
+			loginError=true;
+		  errors.push({msg:'Username and Password Combination Invalid'});
+		}
+		if (loginError) {
+			res.render('user_login',{title:'User Login',user:user,errors:errors});
+		}
+	});
+}
+
+exports.user_login_get = function(req, res) {
+	res.render('user_login',{title:"User Login", errors:{}});
+}
 
 exports.user_delete_get = function (req, res) {
 	res.send('NOT IMPLEMENTED:User delete GET');
@@ -137,3 +195,8 @@ exports.user_update_get = function (req, res) {
 exports.user_update_post = function (req, res) {
 	res.send('NOT IMPLEMENTED:User update POST');
 };
+
+exports.user_logout=function(req,res) {
+	var token=null;
+
+}

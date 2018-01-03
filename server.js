@@ -7,7 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
 var path=require('path');
-
+var cors=require('cors');
 
 app.use(express.static('public'));
 app.set('views', path.join(__dirname,'views'));
@@ -68,7 +68,7 @@ dbDetails.type = 'MongoDB';
 console.log('Connected to MongoDB at: %s', mongoURL);
 });
 };
- 
+
 
 var mongoDB = 'mongodb://dbuser_master:supersecurepassword@ds137256.mlab.com:37256/jheers80-training-test';
 mongoose.connect(mongoDB, {
@@ -109,6 +109,7 @@ app.get('/', function (req, res) {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
 app.use(expressValidator({
 	customValidators:{
 		isEqual:(value1,value2)=> {
@@ -129,7 +130,11 @@ app.use('/train', train);
 // error handling
 app.use(function (err, req, res, next) {
 	console.error(err.stack);
-	res.status(500).send('Something bad happened!');
+	res.status(err.status || 500);
+	res.render('error',{
+		message:err.message,
+		error:err
+	});
 });
 
 initDb(function (err) {
