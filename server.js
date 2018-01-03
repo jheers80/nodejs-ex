@@ -105,7 +105,9 @@ app.get('/', function (req, res) {
 		});
 	}
 });
-
+app.get('/pagecount', function (req, res) {
+	res.json({status:false,message:'Not implemented'});
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
