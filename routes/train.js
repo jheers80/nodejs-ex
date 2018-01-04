@@ -72,6 +72,8 @@ router.post('/location/:id/update', location_controller.location_update_post);
 //GET Request for one location
 router.get('/location/:id', location_controller.location_detail);
 
+router.get('/location/:loc_id/jobrole/:jr_id/json', train_controller.json_traininginstance_by_location_jobrole);
+
 //GET Request all locations list
 router.get('/locations', location_controller.location_list);
 

@@ -14,7 +14,7 @@ function findTrainingInstance(id) {
 			.populate('Location')
 			.populate('JobRole')
 			.exec();
-				
+
 }
 
 exports.training_instance_detail_JSON = function (req, res, next) {
@@ -30,7 +30,7 @@ exports.training_instance_detail = function (req, res, next) {
 			ti: ti
 		});
 	});
-	
+
 };
 
 exports.training_instance_create_post = function (req, res, next) {
@@ -342,7 +342,7 @@ exports.copy_training_instance_get = function(req, res, next) {
 		//Successful, so render!
 		res.render('ti_copy',{title:'Copy Training Instance',ti_list:list_training_instance});
 	});
-	
+
 }
 
 exports.copy_training_instance_post = function(req, res, next) {
